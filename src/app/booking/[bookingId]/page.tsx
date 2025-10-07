@@ -139,7 +139,7 @@ export default function BookingDetailPage({ params }: PageProps): JSX.Element {
           color: isOverdue ? '#721c24' : '#0c5460',
           border: `1px solid ${isOverdue ? '#f5c6cb' : '#bee5eb'}`,
           marginBottom: '16px',
-          display: 'flex',
+          display: 'inline-flex',
           alignItems: 'center',
         }}>
           <Icon name={isOverdue ? 'error_outline' : 'info_outline'} style={{ marginRight: '8px' }} />
