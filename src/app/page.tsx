@@ -244,7 +244,7 @@ export default function Dashboard(): JSX.Element {
 
   useEffect(() => {
     if (user) {
-      const q = query(collection(db, 'registrations'), orderBy('createdAt', 'desc'));
+      const q = query(collection(db, 'registrations'), orderBy('createdAt', 'asc'));
       
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const bookingsData = querySnapshot.docs.map(doc => ({
@@ -273,12 +273,14 @@ export default function Dashboard(): JSX.Element {
 
     for (const status in groups) {
       groups[status].sort((a, b) => {
-        if (!a.preferredRepairDateTime) return 1;
-        if (!b.preferredRepairDateTime) return -1;
+        if (!a.createdAt) return 1;
+        if (!b.createdAt) return -1;
         try {
-          const dateA = parse(a.preferredRepairDateTime, 'EEE, MMM d, yyyy  -  h a', new Date());
-          const dateB = parse(b.preferredRepairDateTime, 'EEE, MMM d, yyyy  -  h a', new Date());
-          return dateA.getTime() - dateB.getTime();
+          // const dateA = parse(a.preferredRepairDateTime, 'EEE, MMM d, yyyy  -  h a', new Date());
+          // const dateB = parse(b.preferredRepairDateTime, 'EEE, MMM d, yyyy  -  h a', new Date());
+          // return dateA.getTime() - dateB.getTime();
+                return a.createdAt.toMillis() - b.createdAt.toMillis();
+
         } catch (e) {
           // --- FIXED WARNING ---
           // Use the 'e' variable in the log

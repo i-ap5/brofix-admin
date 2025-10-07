@@ -25,11 +25,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 } */
 :root {
-  --primary-color: #007bff;
+  --primary-color: #EC4D36;
   --background-color: #f8f9fa;
   --surface-color: #ffffff;
   --text-color: #212529;
-  --text-muted-color: #6c757d;
+  --text-muted-color: #7d6d6c;
   --border-color: #dee2e6;
   --border-radius: 8px;
 }
