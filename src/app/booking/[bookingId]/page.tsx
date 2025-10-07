@@ -2,7 +2,7 @@
 
 import { useState, useEffect, JSX } from 'react';
 import Link from 'next/link';
-import { doc, onSnapshot, updateDoc, Timestamp } from 'firebase/firestore';
+import { doc, onSnapshot, updateDoc, Timestamp, GeoPoint } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -22,11 +22,13 @@ interface Booking {
   address?: { house?: string; area?: string; city?: string; pin?: string; };
   device?: { brand?: string; model?: string; };
   preferredRepairDateTimeString?: string;
+    preferredRepairDateTime?: string;
+
   repairMode?: string;
   status?: string;
-  location?: any; // Firestore GeoPoint
+  location?: GeoPoint; // Firestore GeoPoint
   createdAt?: Timestamp;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 // Simple Icon helper component
@@ -172,7 +174,7 @@ export default function BookingDetailPage({ params }: PageProps): JSX.Element {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '10px' }}>
             <p><strong>GPS:</strong> Lat: {booking.location.latitude}, Lon: {booking.location.longitude}</p>
             <button 
-              onClick={() => handleDirections(booking.location.latitude, booking.location.longitude)}
+              onClick={() => handleDirections(booking.location!.latitude, booking.location!.longitude)}
               style={{ padding: '6px 12px', fontSize: '0.9rem' }}
             >
               Get Directions
@@ -191,3 +193,4 @@ export default function BookingDetailPage({ params }: PageProps): JSX.Element {
     </div>
   );
 }
+
