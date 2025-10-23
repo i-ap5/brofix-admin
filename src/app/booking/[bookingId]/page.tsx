@@ -28,6 +28,8 @@ interface Booking {
   status?: string;
   location?: GeoPoint; // Firestore GeoPoint
   createdAt?: Timestamp;
+    issueDescription?: string;
+  additionalNotes?: string;
   [key: string]: unknown;
 }
 
@@ -189,6 +191,9 @@ export default function BookingDetailPage({ params }: PageProps): JSX.Element {
         <p><strong>Scheduled For:</strong> {booking.preferredRepairDateTimeString || booking.preferredRepairDateTime || 'N/A'}</p>
         <p><strong>Booked On:</strong> {booking.createdAt ? booking.createdAt.toDate().toLocaleString() : 'N/A'}</p>
         <p><strong>Repair Mode:</strong> {booking.repairMode || 'N/A'}</p>
+        {booking.issueDescription && <p><strong>Issue Description:</strong> {booking.issueDescription}</p>}
+{booking.additionalNotes && <p><strong>Additional Notes:</strong> {booking.additionalNotes}</p>}
+
       </div>
     </div>
   );
